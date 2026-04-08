@@ -1,57 +1,203 @@
-# Chào mừng bạn đến với mẫu phát triển ứng dụng Expo của nhóm 4795 👋
+# RuOK - Hybrid Safety App
 
-Đây là một dự án [Expo](https://expo.dev) được tạo bằng [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+RuOK is a mobile personal safety application designed for students living away from home. The app addresses the challenge of balancing **everyday privacy** with **rapid emergency response**, allowing users to stay independent while ensuring trusted contacts can be notified when necessary.
 
-## Bắt đầu
+Built with **React Native (Expo)** for the BCOK course (Assignment 3).
 
-1. Clone repository về máy.
+---
 
-   `git clone git@github.com:DiKeVoi/Expo-Template.git`
+## Overview
 
-2. Cài đặt các dependency
+Traditional safety apps often require continuous location tracking, which can feel invasive during normal daily use. RuOK introduces a **hybrid safety model**:
 
-   ```bash
-   npm install
-   ```
+- **Privacy-first during normal commuting**
+- **Immediate override during emergencies**
+- **Automatic escalation when users become unresponsive**
 
-3. Chạy ứng dụng
+This approach ensures both **user autonomy** and **fail-safe protection**.
 
-   ```bash
-   npx expo start
-   ```
+---
 
-4. Nếu Expo thông báo đang chạy development build, chuyển sang Expo Go bằng cách nhấn `s`.
+## MVP Features
 
-5. Quét mã QR bằng cách sử dụng Expo Go (Android) và Camera (iOS).
+### 1. Smart Check-in
 
-Đối với phần thuyết trình lần này, chúng ta sẽ sử dụng:
+Users can set an estimated travel time (ETA) when heading home.
 
-- [Expo Go](https://expo.dev/go), một môi trường sandbox giới hạn để thử nghiệm phát triển ứng dụng với Expo.
+- Runs silently in the background
+- Sends only a simple status update such as **"Heading home"**
+- Does **not** continuously track GPS
+- Preserves privacy during normal use
 
-Bạn có thể tải Expo Go trên Play Store (Android) và App Store (iOS).
+### 2. Emergency SOS
 
-Bạn có thể bắt đầu phát triển bằng cách chỉnh sửa các tệp bên trong thư mục **app**. Dự án này sử dụng [file-based routing](https://docs.expo.dev/router/introduction).
+Users can instantly trigger emergency mode by:
 
-## Tạo lại dự án mới
+- Pressing the **hardware button 3 times**
+- Tapping the **SOS button on screen**
 
-Khi bạn sẵn sàng, hãy chạy:
+Once activated, the app immediately:
+
+- Overrides privacy mode
+- Shares **live GPS location**
+- Starts **audio recording**
+- Sends alerts to trusted contacts
+
+### 3. Fail-safe Logic
+
+If the check-in timer expires and the user does not confirm safe arrival, the system automatically escalates to emergency mode.
+
+This protects users in situations where they may be unable to manually trigger SOS.
+
+### 4. Trusted Contacts
+
+Users can maintain a list of trusted contacts who will receive:
+
+- Emergency notifications
+- Live location updates
+- Alert calls or messages
+
+---
+
+## Tech Stack
+
+- **Framework:** React Native (Expo)
+- **Language:** TypeScript / JavaScript
+- **Package Manager:** npm
+- **Version Control:** Git + GitHub
+- **Design Prototype:** Figma
+
+---
+
+## Installation
+
+### Prerequisites
+
+Make sure the following tools are installed:
+
+- **Node.js** (LTS version recommended)
+- **Expo Go** on your mobile device
+
+### Clone the Repository
 
 ```bash
-npm run reset-project
+git clone https://github.com/BNATT-RuOK/bcok-mobile-app-assignment3.git
+cd bcok-mobile-app-assignment3
 ```
 
-Lệnh này sẽ chuyển mã khởi tạo sang thư mục **app-example** và tạo một thư mục **app** trống để bạn bắt đầu phát triển.
+### Install Dependencies
 
-## Tìm hiểu thêm
+```bash
+npm install
+```
 
-Để tìm hiểu thêm về cách phát triển dự án Expo, hãy tham khảo các tài nguyên sau:
+### Start Development Server
 
-- [Tài liệu Expo](https://docs.expo.dev/): Tìm hiểu kiến thức nền tảng, hoặc đi sâu hơn với các [hướng dẫn](https://docs.expo.dev/guides).
-- [Hướng dẫn Learn Expo](https://docs.expo.dev/tutorial/introduction/): Làm theo hướng dẫn từng bước để tạo một dự án chạy được trên Android, iOS và web.
+```bash
+npx expo start
+```
 
-## Tham gia cộng đồng
+### Run on Device
 
-Tham gia cộng đồng các nhà phát triển đang xây dựng ứng dụng đa nền tảng.
+1. Connect your phone and computer to the same Wi-Fi network
+2. Open **Expo Go**
+3. Scan the QR code from the terminal
+4. Wait for the bundle to finish loading
 
-- [Expo trên GitHub](https://github.com/expo/expo): Xem nền tảng mã nguồn mở của chúng tôi và đóng góp.
-- [Cộng đồng Discord](https://chat.expo.dev): Trò chuyện với người dùng Expo và đặt câu hỏi.
+Hot Reload is enabled for real-time development.
+
+---
+
+## Project Resources
+
+- **Landing Page:** [https://bnatt-ruok.github.io/bcok-landing-page-assignment2/](https://bnatt-ruok.github.io/bcok-landing-page-assignment2/)
+- **Figma Prototype:** TBD
+
+---
+
+## Git Workflow
+
+### Commit Convention
+
+This project follows the **Conventional Commits** standard.
+
+```bash
+<type>[optional scope]: <description>
+```
+
+Supported types:
+
+- `feat` — new feature
+- `fix` — bug fix
+- `docs` — documentation changes
+- `style` — formatting only
+- `refactor` — code restructuring
+- `perf` — performance improvement
+- `test` — test updates
+- `chore` — tooling and maintenance
+
+Example:
+
+```bash
+git commit -m "feat(auth): add login functionality"
+```
+
+### Branch Strategy
+
+- `main` — production-ready branch
+- `feature/*` — feature development
+- `bugfix/*` — bug fixes
+- `hotfix/*` — urgent fixes
+
+### Standard Development Flow
+
+```bash
+git checkout main
+git pull origin main
+git checkout -b feature/your-feature-name
+```
+
+After implementation:
+
+```bash
+git add .
+git commit -m "feat(module): add new functionality"
+git fetch origin
+git rebase origin/main
+git push origin feature/your-feature-name
+```
+
+Then create a Pull Request into `main`.
+
+After merge:
+
+```bash
+git checkout main
+git pull origin main
+git branch -d feature/your-feature-name
+git push origin --delete feature/your-feature-name
+```
+
+---
+
+## Development Quality Controls
+
+The repository includes Git hooks to maintain code quality:
+
+- **pre-commit** — linting and formatting checks
+- **commit-msg** — commit message validation
+
+This helps ensure consistency across team collaboration.
+
+---
+
+## Academic Context
+
+This project was developed as part of the **BCOK Assignment 3**, focusing on:
+
+- product thinking
+- privacy-aware system design
+- fail-safe emergency workflows
+- mobile UX for real-world safety scenarios
+
+The solution emphasizes both **technical feasibility** and \*\*human-centered design princ
