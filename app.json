@@ -1,11 +1,11 @@
 {
   "expo": {
-    "name": "expo-template",
-    "slug": "expo-template",
+    "name": "RuOK",
+    "slug": "ruok-hybrid-safety",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
-    "scheme": "expotemplate",
+    "scheme": "ruok",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "ios": {
@@ -45,6 +45,19 @@
     "experiments": {
       "typedRoutes": true,
       "reactCompiler": true
+    },
+    "extra": {
+      "router": {},
+      "eas": {
+        "projectId": "f11a0b24-884a-4ea7-ae87-79cf965c8b62"
+      }
+    },
+    "owner": "phannnxrum",
+    "runtimeVersion": {
+      "policy": "appVersion"
+    },
+    "updates": {
+      "url": "https://u.expo.dev/f11a0b24-884a-4ea7-ae87-79cf965c8b62"
     }
   }
 }

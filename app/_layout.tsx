@@ -20,6 +20,13 @@ export default function RootLayout() {
     <ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
       <Stack>
         <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+        <Stack.Screen
+          name="sos-detail"
+          options={{
+            title: "SOS Details",
+            headerBackTitle: "Home",
+          }}
+        />
       </Stack>
       <StatusBar style="auto" />
     </ThemeProvider>
