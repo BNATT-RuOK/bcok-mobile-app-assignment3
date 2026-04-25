@@ -12,6 +12,7 @@
       "supportsTablet": true
     },
     "android": {
+      "package": "com.phannnxrum.ruok",
       "adaptiveIcon": {
         "backgroundColor": "#E6F4FE",
         "foregroundImage": "./assets/images/android-icon-foreground.png",
@@ -52,7 +53,7 @@
         "projectId": "f11a0b24-884a-4ea7-ae87-79cf965c8b62"
       }
     },
-    "owner": "phannnxrum",
+    "owner": "bnatt-ruok",
     "runtimeVersion": {
       "policy": "appVersion"
     },

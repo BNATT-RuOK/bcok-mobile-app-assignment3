@@ -17,21 +17,68 @@ export default function TabLayout() {
         tabBarButton: HapticTab,
       }}
     >
+      {/* Tab Home */}
       <Tabs.Screen
-        name="onboarding"
+        name="home"
         options={{
-          title: "Onboarding",
-          href: null,
-          tabBarStyle: { display: "none" },
+          title: "Home",
+          tabBarIcon: ({ color }) => (
+            <IconSymbol size={28} name="house.fill" color={color} />
+          ),
         }}
       />
+
+      {/* Tab Contacts */}
       <Tabs.Screen
+        name="contacts"
+        options={{
+          title: "Contacts",
+          tabBarIcon: ({ color }) => (
+            <IconSymbol size={28} name="person.2.fill" color={color} />
+          ),
+        }}
+      />
+
+      {/* Tab History */}
+      <Tabs.Screen
+        name="history"
+        options={{
+          title: "History",
+          tabBarIcon: ({ color }) => (
+            <IconSymbol size={28} name="clock.fill" color={color} />
+          ),
+        }}
+      />
+
+      {/* Tab Profile */}
+      <Tabs.Screen
+        name="profile"
+        options={{
+          title: "Profile",
+          tabBarIcon: ({ color }) => (
+            <IconSymbol size={28} name="person.circle.fill" color={color} />
+          ),
+        }}
+      />
+
+      {/* Tab Explore (giữ lại nếu cần) */}
+      {/* <Tabs.Screen
         name="explore"
         options={{
           title: "Explore",
           tabBarIcon: ({ color }) => (
             <IconSymbol size={28} name="paperplane.fill" color={color} />
           ),
+        }}
+      /> */}
+
+      {/* Tab Onboarding (ẩn đi) */}
+      <Tabs.Screen
+        name="onboarding"
+        options={{
+          title: "Onboarding",
+          href: "/onboarding",
+          tabBarStyle: { display: "none" },
         }}
       />
     </Tabs>

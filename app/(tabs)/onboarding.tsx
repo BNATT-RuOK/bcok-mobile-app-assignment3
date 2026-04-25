@@ -1,233 +1,248 @@
 import { useRouter } from "expo-router";
 import React from "react";
 import {
-    Pressable,
-    ScrollView,
-    Text,
-    useWindowDimensions,
-    View,
+  Pressable,
+  ScrollView,
+  StyleSheet,
+  Text,
+  useWindowDimensions,
+  View,
 } from "react-native";
 
 import { Colors } from "@/constants/theme";
 import { useColorScheme } from "@/hooks/use-color-scheme";
 
+// Nội dung chuẩn theo thiết kế mày đưa
 const ONBOARDING_STEPS = [
   {
-    title: "Template headline 01",
+    title: "Hi buddy, Welcome\nto RuOK!",
     description:
-      "Replace this paragraph with your first onboarding message. Keep it concise and focused on one clear benefit.",
-    accent: "#2A9D8F",
+      "Explore the app, your 24/7 safety net away from home. One tap for peace of mind, easing every worry!",
+    bgColor: "#A5A6FF", // Màu tím nhạt màn 1
   },
   {
-    title: "Template headline 02",
+    title: "2 Ways We Keep You Safe",
     description:
-      "Use this space for your second message. Explain another key value and how users can get started quickly.",
-    accent: "#E76F51",
+      "Enjoy your independence. Combining routine updates with instant emergency alerts.",
+    bgColor: "#FFFFFF",
+    features: [
+      {
+        title: "Check-in daily",
+        desc: "Let your family know you're safe with just one tap. No more nagging phone calls!",
+        color: "#C6F6D5", // Xanh lá nhạt
+        emoji: "☀️",
+      },
+      {
+        title: "SOS",
+        desc: "Get immediate help. Instantly share your live location and surroundings with trusted contacts.",
+        color: "#FED7D7", // Đỏ nhạt
+        emoji: "🔔",
+      },
+    ],
   },
   {
-    title: "Template headline 03",
+    title: "Your Privacy,\nOur Priority",
     description:
-      "Add your final onboarding message here. End with a clear call-to-action that leads into the app experience.",
-    accent: "#264653",
+      "Just a few quick steps before we start! RuOK needs access to your Location and Media to work perfectly in emergencies.",
+    bgColor: "#FFFFFF",
   },
 ] as const;
 
-export default function OnboardingScreenTemplate() {
+export default function OnboardingScreen() {
   const router = useRouter();
   const colorScheme = useColorScheme() ?? "light";
   const palette = Colors[colorScheme];
   const { width } = useWindowDimensions();
 
   const [currentStepIndex, setCurrentStepIndex] = React.useState(0);
-
   const currentStep = ONBOARDING_STEPS[currentStepIndex];
   const isLastStep = currentStepIndex === ONBOARDING_STEPS.length - 1;
 
-  const completeOnboarding = React.useCallback(() => {
-    // Route to the home page.
-    router.replace("/home");
-  }, [router]);
-
-  const goToNextStep = React.useCallback(() => {
+  const goToNextStep = () => {
     if (isLastStep) {
-      completeOnboarding();
-      return;
+      router.replace("/home");
+    } else {
+      setCurrentStepIndex((prev) => prev + 1);
     }
-
-    setCurrentStepIndex((prev) =>
-      Math.min(prev + 1, ONBOARDING_STEPS.length - 1),
-    );
-  }, [completeOnboarding, isLastStep]);
+  };
 
   return (
-    <ScrollView
-      contentInsetAdjustmentBehavior="automatic"
-      contentContainerStyle={{ flexGrow: 1 }}
-    >
-      <View
-        style={{
-          flex: 1,
-          paddingHorizontal: 24,
-          paddingTop: 16,
-          paddingBottom: 32,
-          gap: 24,
-          backgroundColor: palette.background,
-        }}
+    <View style={[styles.container, { backgroundColor: currentStep.bgColor }]}>
+      <ScrollView 
+        contentContainerStyle={styles.scrollContent}
+        showsVerticalScrollIndicator={false}
       >
-        <View
-          style={{
-            borderRadius: 28,
-            borderCurve: "continuous",
-            overflow: "hidden",
-            minHeight: 320,
-            padding: 24,
-            justifyContent: "space-between",
-            backgroundColor: colorScheme === "dark" ? "#1B1E1F" : "#F2F7F7",
-            boxShadow:
-              colorScheme === "dark"
-                ? "0 4px 16px rgba(0, 0, 0, 0.35)"
-                : "0 8px 24px rgba(17, 24, 28, 0.08)",
-          }}
-        >
-          <View
-            style={{
-              position: "absolute",
-              width: width * 0.7,
-              height: width * 0.7,
-              borderRadius: 999,
-              top: -width * 0.35,
-              right: -width * 0.2,
-              backgroundColor: currentStep.accent,
-              opacity: 0.18,
-            }}
-          />
-
-          <View style={{ gap: 14 }}>
-            <Text
-              selectable
-              style={{
-                color: palette.icon,
-                fontSize: 13,
-                letterSpacing: 1,
-                textTransform: "uppercase",
-              }}
-            >
-              Step {currentStepIndex + 1} of {ONBOARDING_STEPS.length}
-            </Text>
-
-            <Text
-              selectable
-              style={{
-                color: palette.text,
-                fontSize: 34,
-                lineHeight: 40,
-                fontWeight: "700",
-                maxWidth: "90%",
-              }}
-            >
-              {currentStep.title}
-            </Text>
-
-            <Text
-              selectable
-              style={{
-                color: palette.icon,
-                fontSize: 17,
-                lineHeight: 26,
-                maxWidth: "95%",
-              }}
-            >
-              {currentStep.description}
-            </Text>
-          </View>
-
-          <View
-            style={{
-              width: 124,
-              height: 124,
-              borderRadius: 32,
-              borderCurve: "continuous",
-              alignItems: "center",
-              justifyContent: "center",
-              backgroundColor: currentStep.accent,
-              boxShadow: "0 6px 20px rgba(0, 0, 0, 0.18)",
-            }}
-          >
-            <Text
-              selectable
-              style={{ color: "#FFFFFF", fontSize: 36, fontWeight: "800" }}
-            >
-              {currentStepIndex + 1}
-            </Text>
-          </View>
+        {/* Phần nội dung Text */}
+        <View style={styles.textContent}>
+          <Text style={[styles.title, { color: currentStepIndex === 0 ? "white" : "#1A1C1E" }]}>
+            {currentStep.title}
+          </Text>
+          <Text style={[styles.description, { color: currentStepIndex === 0 ? "white" : "#6B7280" }]}>
+            {currentStep.description}
+          </Text>
         </View>
 
-        <View style={{ gap: 20 }}>
-          <View style={{ flexDirection: "row", gap: 8, alignItems: "center" }}>
-            {ONBOARDING_STEPS.map((step, index) => {
-              const isActive = index === currentStepIndex;
-
-              return (
-                <View
-                  key={step.title}
-                  style={{
-                    height: 8,
-                    width: isActive ? 30 : 8,
-                    borderRadius: 999,
-                    backgroundColor: isActive
-                      ? step.accent
-                      : palette.tabIconDefault,
-                    opacity: isActive ? 1 : 0.35,
-                  }}
-                />
-              );
-            })}
+        {/* Layout đặc biệt cho Step 2 (2 cái Card) */}
+        {currentStepIndex === 1 && (
+          <View style={styles.featureContainer}>
+            {currentStep.features?.map((f, i) => (
+              <View key={i} style={[styles.featureCard, { backgroundColor: f.color }]}>
+                <Text style={{ fontSize: 32, marginBottom: 8 }}>{f.emoji}</Text>
+                <Text style={styles.featureTitle}>{f.title}</Text>
+                <Text style={styles.featureDesc}>{f.desc}</Text>
+              </View>
+            ))}
           </View>
+        )}
 
-          <View style={{ flexDirection: "row", gap: 12 }}>
-            <Pressable
-              onPress={completeOnboarding}
-              style={{
-                flex: 1,
-                minHeight: 52,
-                borderRadius: 16,
-                borderCurve: "continuous",
-                alignItems: "center",
-                justifyContent: "center",
-                borderWidth: 1,
-                borderColor: palette.tabIconDefault,
-              }}
-            >
-              <Text
-                selectable
-                style={{ color: palette.text, fontSize: 16, fontWeight: "600" }}
-              >
-                Skip
-              </Text>
-            </Pressable>
+        {/* Chỗ này mày bảo bỏ qua con meerkat nên tao để trống để mày nhét Image sau */}
+        <View style={styles.imagePlaceholder} />
 
-            <Pressable
-              onPress={goToNextStep}
-              style={{
-                flex: 2,
-                minHeight: 52,
-                borderRadius: 16,
-                borderCurve: "continuous",
-                alignItems: "center",
-                justifyContent: "center",
-                backgroundColor: currentStep.accent,
-              }}
+      </ScrollView>
+
+      {/* Footer chứa Indicators và Buttons */}
+      <View style={styles.footer}>
+        {/* Page Indicators */}
+        <View style={styles.indicatorContainer}>
+          {ONBOARDING_STEPS.map((_, index) => (
+            <View
+              key={index}
+              style={[
+                styles.indicator,
+                { 
+                  backgroundColor: index === currentStepIndex ? "#1A1C1E" : "#D1D5DB",
+                  width: index === currentStepIndex ? 12 : 8 
+                },
+              ]}
+            />
+          ))}
+        </View>
+
+        {/* Buttons */}
+        <View style={styles.buttonWrapper}>
+          <Pressable 
+            onPress={goToNextStep} 
+            style={[styles.primaryButton, { backgroundColor: "#2E236C" }]}
+          >
+            <Text style={styles.primaryButtonText}>
+              {isLastStep ? "Get Started" : "Next"}
+            </Text>
+          </Pressable>
+
+          {isLastStep && (
+            <Pressable 
+              onPress={() => router.replace("/login")} 
+              style={styles.secondaryButton}
             >
-              <Text
-                selectable
-                style={{ color: "#FFFFFF", fontSize: 16, fontWeight: "700" }}
-              >
-                {isLastStep ? "Get Started" : "Next"}
-              </Text>
+              <Text style={styles.secondaryButtonText}>Log In</Text>
             </Pressable>
-          </View>
+          )}
         </View>
       </View>
-    </ScrollView>
+    </View>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+  scrollContent: {
+    paddingHorizontal: 30,
+    paddingTop: 80,
+    paddingBottom: 150, // Chừa chỗ cho footer
+  },
+  textContent: {
+    marginBottom: 40,
+  },
+  title: {
+    fontSize: 36,
+    fontWeight: "800",
+    lineHeight: 42,
+    marginBottom: 16,
+  },
+  description: {
+    fontSize: 16,
+    lineHeight: 24,
+    opacity: 0.9,
+  },
+  featureContainer: {
+    flexDirection: 'row',
+    gap: 12,
+    marginBottom: 40,
+  },
+  featureCard: {
+    flex: 1,
+    padding: 16,
+    borderRadius: 20,
+    minHeight: 180,
+  },
+  featureTitle: {
+    fontSize: 15,
+    fontWeight: "700",
+    marginBottom: 6,
+    color: "#1A1C1E",
+  },
+  featureDesc: {
+    fontSize: 11,
+    lineHeight: 16,
+    color: "#4B5563",
+  },
+  imagePlaceholder: {
+    height: 250, // Chỗ này sau mày nhét con Meerkat vào
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  footer: {
+    position: 'absolute',
+    bottom: 50,
+    left: 0,
+    right: 0,
+    alignItems: 'center',
+    paddingHorizontal: 30,
+  },
+  indicatorContainer: {
+    flexDirection: 'row',
+    gap: 8,
+    marginBottom: 25,
+  },
+  indicator: {
+    height: 8,
+    borderRadius: 4,
+  },
+  buttonWrapper: {
+    width: '100%',
+    gap: 12,
+  },
+  primaryButton: {
+    width: '100%',
+    height: 56,
+    borderRadius: 28,
+    justifyContent: 'center',
+    alignItems: 'center',
+    elevation: 2,
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
+  },
+  primaryButtonText: {
+    color: 'white',
+    fontSize: 18,
+    fontWeight: "700",
+  },
+  secondaryButton: {
+    width: '100%',
+    height: 56,
+    borderRadius: 28,
+    borderWidth: 1,
+    borderColor: "#1A1C1E",
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  secondaryButtonText: {
+    color: "#1A1C1E",
+    fontSize: 16,
+    fontWeight: "600",
+  },
+});
