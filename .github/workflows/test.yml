@@ -27,10 +27,12 @@ jobs:
         run: npx jest --coverage
 
       - name: 5. SonarCloud Scan
-        uses: sonarsource/sonarcloud-scan-action@master
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+              run: |
+                npm install -g sonarqube-scanner
+                sonar-scanner
+              env:
+                SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+                GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: 6. Upload Artifact test-report
         uses: actions/upload-artifact@v4
