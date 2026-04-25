@@ -1,5 +1,12 @@
 [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=BNATT-RuOK_bcok-mobile-app-assignment3&metric=coverage)](https://sonarcloud.io/summary/new_code?id=BNATT-RuOK_bcok-mobile-app-assignment3)
 
+[![Reliability Rating](https://sonarcloud.io/api/project_badges/measure?project=BNATT-RuOK_bcok-mobile-app-assignment3&metric=reliability_rating)](https://sonarcloud.io/summary/new_code?id=BNATT-RuOK_bcok-mobile-app-assignment3)
+
+[![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=BNATT-RuOK_bcok-mobile-app-assignment3&metric=security_rating)](https://sonarcloud.io/summary/new_code?id=BNATT-RuOK_bcok-mobile-app-assignment3)
+
+[![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=BNATT-RuOK_bcok-mobile-app-assignment3&metric=sqale_rating)](https://sonarcloud.io/summary/new_code?id=BNATT-RuOK_bcok-mobile-app-assignment3)
+
+[![Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=BNATT-RuOK_bcok-mobile-app-assignment3&metric=vulnerabilities)](https://sonarcloud.io/summary/new_code?id=BNATT-RuOK_bcok-mobile-app-assignment3)
 
 # RuOK - Personal Safety Mobile App
 
