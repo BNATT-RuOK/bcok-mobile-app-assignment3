@@ -1,0 +1,39 @@
+name: CI/CD RuOK Project
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  test-and-sonar:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 1. Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: 2. Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+
+      - name: 3. Install dependencies
+        run: npm install --legacy-peer-deps
+
+      - name: 4. Run test & coverage
+        run: npx jest --coverage
+
+      - name: 5. SonarCloud Scan
+        uses: sonarsource/sonarcloud-scan-action@master
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+
+      - name: 6. Upload Artifact test-report
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-report
+          path: coverage/lcov-report/
